@@ -1,0 +1,1195 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Festa Épica! - Minecraft Aventura</title>
+    <link rel="icon" type="image/png" href="grama.png">
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap');
+
+        /* Reset básico */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            user-select: none;
+            -webkit-user-select: none;
+            -moz-user-select: none;
+            -ms-user-select: none;
+            -webkit-touch-callout: none;
+            -webkit-tap-highlight-color: transparent;
+        }
+
+        /* Desabilita drag de imagens */
+        img {
+            -webkit-user-drag: none;
+            -khtml-user-drag: none;
+            -moz-user-drag: none;
+            -o-user-drag: none;
+            user-drag: none;
+            pointer-events: auto;
+        }
+
+        body {
+            background-color: #55a84e;
+            background-image: url('imagens/background.png');
+            background-size: cover;
+            background-repeat: no-repeat;
+            background-position: center;
+            background-attachment: fixed;
+            font-family: 'Press Start 2P', cursive;
+            color: #fff;
+            text-align: center;
+            padding: 20px;
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: flex-start;
+            position: relative;
+            overflow-x: hidden;
+            user-select: none;
+            -webkit-user-select: none;
+            -moz-user-select: none;
+            -ms-user-select: none;
+        }
+
+        /* Imagens decorativas flutuantes */
+        .floating-images {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            z-index: 1;
+        }
+
+        .floating-img {
+            position: absolute;
+            opacity: 0.3;
+            animation: floatAround 8s ease-in-out infinite;
+        }
+
+        .floating-img img {
+            width: 40px;
+            height: 40px;
+            filter: drop-shadow(2px 2px 4px rgba(0,0,0,0.3));
+        }
+
+        .floating-img:nth-child(1) {
+            top: 10%;
+            left: 5%;
+            animation-delay: 0s;
+        }
+
+        .floating-img:nth-child(2) {
+            top: 20%;
+            right: 10%;
+            animation-delay: 2s;
+        }
+
+        .floating-img:nth-child(3) {
+            top: 60%;
+            left: 8%;
+            animation-delay: 4s;
+        }
+
+        .floating-img:nth-child(4) {
+            top: 15%;
+            left: 50%;
+            animation-delay: 1s;
+        }
+
+        .floating-img:nth-child(5) {
+            top: 35%;
+            right: 5%;
+            animation-delay: 3s;
+        }
+
+        .floating-img:nth-child(6) {
+            top: 45%;
+            left: 15%;
+            animation-delay: 5s;
+        }
+
+        .floating-img:nth-child(7) {
+            top: 75%;
+            right: 20%;
+            animation-delay: 6s;
+        }
+
+        .floating-img:nth-child(8) {
+            top: 80%;
+            left: 40%;
+            animation-delay: 7s;
+        }
+
+        .floating-img:nth-child(9) {
+            top: 30%;
+            left: 75%;
+            animation-delay: 8s;
+        }
+
+        .floating-img:nth-child(10) {
+            top: 55%;
+            right: 35%;
+            animation-delay: 1.5s;
+        }
+
+        .floating-img:nth-child(11) {
+            top: 25%;
+            right: 40%;
+            animation-delay: 3.5s;
+        }
+
+        .floating-img:nth-child(12) {
+            top: 65%;
+            left: 60%;
+            animation-delay: 4.5s;
+        }
+
+        .floating-img:nth-child(4) {
+            top: 70%;
+            right: 5%;
+            animation-delay: 6s;
+        }
+
+        @keyframes floatAround {
+            0%, 100% { transform: translateY(0px) translateX(0px); }
+            25% { transform: translateY(-20px) translateX(10px); }
+            50% { transform: translateY(-10px) translateX(-10px); }
+            75% { transform: translateY(-30px) translateX(5px); }
+        }
+
+        @keyframes float {
+            0%, 100% { background-position: 0% 0%, 0% 0%, 0% 0%; }
+            50% { background-position: 100% 100%, -100% -100%, 50% 50%; }
+        }
+
+        /* Header principal */
+        .main-header {
+            margin-bottom: 30px;
+            position: relative;
+            z-index: 10;
+            animation: bounceIn 1s ease-out;
+        }
+
+        @keyframes bounceIn {
+            0% { transform: scale(0.3); opacity: 0; }
+            50% { transform: scale(1.05); }
+            70% { transform: scale(0.9); }
+            100% { transform: scale(1); opacity: 1; }
+        }
+
+        .header-title {
+            font-size: clamp(1.5rem, 4vw, 3rem);
+            color: #fff200;
+            text-shadow: 
+                4px 4px 0 #000,
+                -2px -2px 0 #000,
+                2px -2px 0 #000,
+                -2px 2px 0 #000;
+            margin-bottom: 15px;
+            animation: glow 2s ease-in-out infinite alternate;
+        }
+
+        @keyframes glow {
+            from { text-shadow: 4px 4px 0 #000, -2px -2px 0 #000, 2px -2px 0 #000, -2px 2px 0 #000, 0 0 10px #fff200; }
+            to { text-shadow: 4px 4px 0 #000, -2px -2px 0 #000, 2px -2px 0 #000, -2px 2px 0 #000, 0 0 20px #fff200, 0 0 30px #fff200; }
+        }
+
+        .header-info {
+            background: linear-gradient(145deg, #008000, #006600);
+            border: 4px solid #000;
+            padding: 15px 25px;
+            display: inline-block;
+            border-radius: 15px;
+            box-shadow: 
+                0 8px 0 #004400,
+                0 8px 15px rgba(0, 0, 0, 0.3);
+            transition: transform 0.3s ease;
+        }
+
+        .header-info:hover {
+            transform: translateY(-2px);
+        }
+
+        .header-info-box p {
+            margin: 5px 0;
+            line-height: 1.3;
+            font-size: 0.8rem;
+        }
+
+        .cake-icon {
+            font-size: 24px;
+            vertical-align: middle;
+            margin-right: 8px;
+            animation: spin 3s linear infinite;
+        }
+
+        @keyframes spin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+
+        /* Card de convite */
+        .invitation-card {
+            background: linear-gradient(145deg, #2b781e, #1e5515);
+            border: 5px solid #000;
+            border-radius: 20px;
+            padding: 25px;
+            max-width: 800px;
+            width: 100%;
+            box-shadow: 
+                0 15px 0 #0a3308,
+                0 15px 25px rgba(0, 0, 0, 0.4);
+            position: relative;
+            z-index: 5;
+            margin-bottom: 20px;
+            animation: slideUp 0.8s ease-out 0.3s both;
+        }
+
+        @keyframes slideUp {
+            from { transform: translateY(50px); opacity: 0; }
+            to { transform: translateY(0); opacity: 1; }
+        }
+
+        .card-title-container {
+            background: linear-gradient(145deg, #008000, #006600);
+            border: 3px solid #000;
+            padding: 20px;
+            border-radius: 15px;
+            margin-bottom: 25px;
+            position: relative;
+            overflow: hidden;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .card-title-container:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 6px 15px rgba(0, 0, 0, 0.3);
+        }
+
+        .card-title-container:active {
+            transform: translateY(1px) scale(0.98);
+        }
+
+        .card-title-container.clicked {
+            animation: pulseClick 0.3s ease-out;
+        }
+
+        .card-title-container::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.15), transparent);
+            animation: shine 4s ease-in-out infinite;
+            z-index: 1;
+            pointer-events: none;
+        }
+
+        @keyframes shine {
+            0% { left: -100%; }
+            50% { left: 100%; }
+            100% { left: 100%; }
+        }
+
+        .card-title {
+            font-size: clamp(1.2rem, 3vw, 2rem);
+            color: #fff200;
+            text-shadow: 
+                3px 3px 0 #000,
+                -1px -1px 0 #000,
+                1px -1px 0 #000,
+                -1px 1px 0 #000;
+            margin-bottom: 10px;
+            position: relative;
+            z-index: 2;
+        }
+
+        .card-title-container p {
+            margin-top: 10px;
+            font-size: 0.7rem;
+            position: relative;
+            z-index: 2;
+        }
+
+        /* Grid de detalhes */
+        .details-grid {
+            display: grid;
+            grid-template-columns: 1fr;
+            gap: 20px;
+            margin-bottom: 25px;
+        }
+
+        .detail-box {
+            background: linear-gradient(145deg, #3b8e2b, #2d6b20);
+            border: 3px solid #000;
+            border-radius: 15px;
+            padding: 20px;
+            display: flex;
+            align-items: flex-start;
+            text-align: left;
+            transition: all 0.3s ease;
+            position: relative;
+            min-height: 120px;
+            width: 100%;
+            cursor: pointer;
+        }
+
+        .detail-box:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.3);
+        }
+
+        .detail-box:active {
+            transform: translateY(1px) scale(0.98);
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.2);
+        }
+
+        .detail-box.clicked {
+            animation: pulseClick 0.3s ease-out;
+        }
+
+        @keyframes pulseClick {
+            0% { transform: scale(1); }
+            50% { transform: scale(1.05); box-shadow: 0 0 20px rgba(59, 142, 43, 0.5); }
+            100% { transform: scale(1); }
+        }
+
+        .detail-icon {
+            font-size: 2.5rem;
+            margin-right: 15px;
+            line-height: 1;
+            animation: bounce 2s ease-in-out infinite;
+            position: relative;
+            flex-shrink: 0;
+        }
+
+        @keyframes bounce {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-10px); }
+        }
+
+        .detail-content {
+            position: relative;
+            flex: 1;
+        }
+
+        .detail-content h3 {
+            margin: 0 0 8px 0;
+            color: #f0c22d;
+            font-size: 0.8rem;
+            text-shadow: 2px 2px 0 #000;
+        }
+
+        .detail-content p {
+            font-size: 0.6rem;
+            line-height: 1.5;
+            word-wrap: break-word;
+            overflow-wrap: break-word;
+            hyphens: auto;
+        }
+
+        .detail-content ul {
+            list-style: none;
+            padding-left: 0;
+            margin-top: 8px;
+        }
+
+        .detail-content li {
+            font-size: 0.6rem;
+            line-height: 1.5;
+            margin-bottom: 5px;
+            position: relative;
+            padding-left: 20px;
+        }
+
+        .detail-content li::before {
+            content: '⚡';
+            position: absolute;
+            left: 0;
+            animation: flash 1.5s ease-in-out infinite;
+        }
+
+        @keyframes flash {
+            0%, 100% { opacity: 1; }
+            50% { opacity: 0.5; }
+        }
+
+        /* Mensagem especial */
+        .special-message-box {
+            background: linear-gradient(145deg, #f0c22d, #d4a021);
+            border: 3px solid #000;
+            border-radius: 15px;
+            padding: 25px;
+            color: #000;
+            text-align: center;
+            margin-bottom: 25px;
+            box-shadow: 
+                inset 0 2px 10px rgba(0, 0, 0, 0.2),
+                0 5px 15px rgba(0, 0, 0, 0.2);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .special-message-box::before {
+            content: '✨';
+            position: absolute;
+            font-size: 2rem;
+            animation: sparkle 2s ease-in-out infinite;
+            top: 10px;
+            right: 10px;
+        }
+
+        @keyframes sparkle {
+            0%, 100% { opacity: 0.5; transform: scale(0.8) rotate(0deg); }
+            50% { opacity: 1; transform: scale(1.2) rotate(180deg); }
+        }
+
+        .message-title {
+            color: #000;
+            font-size: 0.9rem;
+            margin-bottom: 15px;
+            text-shadow: 1px 1px 0 #fff;
+        }
+
+        .special-message-box p {
+            font-size: 0.6rem;
+            line-height: 1.5;
+        }
+
+        /* Botão de confirmação */
+        .confirm-button {
+            background: linear-gradient(145deg, #e53935, #c62828);
+            border: 4px solid #000;
+            border-radius: 15px;
+            padding: 18px 35px;
+            text-decoration: none;
+            color: #fff;
+            font-size: 0.8rem;
+            text-transform: uppercase;
+            font-weight: bold;
+            display: inline-block;
+            margin-bottom: 15px;
+            box-shadow: 
+                0 6px 0 #a51f1f,
+                0 6px 15px rgba(0, 0, 0, 0.3);
+            transition: all 0.2s ease;
+            position: relative;
+        }
+
+        .confirm-button:hover {
+            transform: translateY(3px);
+            box-shadow: 
+                0 3px 0 #a51f1f,
+                0 3px 10px rgba(0, 0, 0, 0.3);
+        }
+
+        .confirm-button:active {
+            transform: translateY(6px);
+            box-shadow: none;
+        }
+
+        .confirm-instruction {
+            font-size: 0.5rem;
+            color: #fff;
+            text-shadow: 1px 1px 0 #000;
+            margin-bottom: 20px;
+            animation: pulse 2s ease-in-out infinite;
+        }
+
+        @keyframes pulse {
+            0%, 100% { opacity: 0.8; }
+            50% { opacity: 1; }
+        }
+
+        /* Footer */
+        .main-footer {
+            font-size: 0.6rem;
+            text-shadow: 1px 1px 0 #000;
+            margin-top: auto;
+            padding: 20px;
+            animation: fadeIn 1s ease-out 1s both;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+
+        /* Container especial para o Steve */
+        .steve-container {
+            position: relative;
+            display: flex;
+            align-items: flex-start;
+            gap: 10px;
+            width: 100%;
+            flex-wrap: wrap;
+        }
+
+        .steve-box {
+            flex: 1 1 auto;
+            min-width: 250px;
+            max-width: 100%;
+        }
+
+        .steve-image {
+            width: 60px;
+            height: 60px;
+            image-rendering: pixelated;
+            filter: drop-shadow(2px 2px 4px rgba(0,0,0,0.5));
+            flex-shrink: 0;
+            margin-top: 5px;
+            order: 2;
+            position: relative;
+            cursor: pointer;
+            transition: all 0.15s ease;
+        }
+
+        /* Responsividade para telas maiores */
+        @media (min-width: 768px) {
+            .details-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+            
+            .detail-content h3 {
+                font-size: 0.9rem;
+            }
+            
+            .detail-content p,
+            .detail-content li {
+                font-size: 0.7rem;
+            }
+            
+            .confirm-button {
+                font-size: 0.9rem;
+            }
+
+            .steve-container {
+                gap: 15px;
+            }
+
+            .steve-image {
+                width: 80px;
+                height: 80px;
+            }
+        }
+
+        @media (min-width: 1024px) {
+            .details-grid {
+                grid-template-columns: repeat(3, 1fr);
+            }
+            
+            .steve-container {
+                gap: 20px;
+            }
+        }
+
+        /* Responsividade mobile melhorada */
+        @media (max-width: 600px) {
+            .invitation-card {
+                padding: 20px;
+                max-width: 95%;
+            }
+            
+            .details-grid {
+                gap: 15px;
+                grid-template-columns: 1fr;
+            }
+            
+            .detail-box {
+                padding: 18px;
+                min-height: auto;
+            }
+            
+            .detail-content h3 {
+                font-size: 0.75rem;
+                margin-bottom: 8px;
+            }
+            
+            .detail-content p,
+            .detail-content li {
+                font-size: 0.6rem;
+                line-height: 1.6;
+            }
+            
+            .steve-container {
+                flex-direction: column;
+                align-items: center;
+                gap: 15px;
+            }
+            
+            .steve-box {
+                min-width: 100%;
+                width: 100%;
+            }
+            
+            .steve-image {
+                width: 70px;
+                height: 70px;
+                margin-top: 0;
+                order: 1;
+            }
+            
+            .header-title {
+                font-size: 1.8rem;
+            }
+            
+            .card-title {
+                font-size: 1.3rem;
+            }
+            
+            .confirm-button {
+                font-size: 0.75rem;
+                padding: 16px 28px;
+            }
+            
+            .special-message-box {
+                padding: 20px;
+            }
+            
+            .special-message-box p {
+                font-size: 0.65rem;
+                line-height: 1.6;
+            }
+        }
+
+        @media (max-width: 400px) {
+            .invitation-card {
+                padding: 15px;
+            }
+            
+            .detail-box {
+                padding: 15px;
+            }
+            
+            .header-title {
+                font-size: 1.5rem;
+            }
+            
+            .card-title {
+                font-size: 1.1rem;
+            }
+            
+            .detail-content h3 {
+                font-size: 0.7rem;
+            }
+            
+            .detail-content p,
+            .detail-content li {
+                font-size: 0.55rem;
+            }
+            
+            .confirm-button {
+                font-size: 0.7rem;
+                padding: 14px 24px;
+            }
+        }
+
+        /* Animações de entrada para os elementos */
+        .detail-box {
+            animation: slideInUp 0.6s ease-out forwards;
+            opacity: 0;
+        }
+
+        .detail-box:nth-child(1) { animation-delay: 0.1s; }
+        .detail-box:nth-child(2) { animation-delay: 0.2s; }
+        .detail-box:nth-child(3) { animation-delay: 0.3s; }
+        .detail-box:nth-child(4) { animation-delay: 0.4s; }
+        .detail-box:nth-child(5) { animation-delay: 0.5s; }
+
+        @keyframes slideInUp {
+            from {
+                transform: translateY(30px);
+                opacity: 0;
+            }
+            to {
+                transform: translateY(0);
+                opacity: 1;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Imagens flutuantes decorativas -->
+    <div class="floating-images">
+        <div class="floating-img">
+            <img src="imagens/diamante.png" alt="Diamante">
+        </div>
+        <div class="floating-img">
+            <img src="imagens/ouro.png" alt="Ouro">
+        </div>
+        <div class="floating-img">
+            <img src="imagens/ferro.png" alt="Ferro">
+        </div>
+        <div class="floating-img">
+            <img src="imagens/diamante.png" alt="Diamante">
+        </div>
+        <div class="floating-img">
+            <img src="imagens/ouro.png" alt="Ouro">
+        </div>
+        <div class="floating-img">
+            <img src="imagens/ferro.png" alt="Ferro">
+        </div>
+        <div class="floating-img">
+            <img src="imagens/diamante.png" alt="Diamante">
+        </div>
+        <div class="floating-img">
+            <img src="imagens/ferro.png" alt="Ferro">
+        </div>
+        <div class="floating-img">
+            <img src="imagens/ouro.png" alt="Ouro">
+        </div>
+        <div class="floating-img">
+            <img src="imagens/diamante.png" alt="Diamante">
+        </div>
+        <div class="floating-img">
+            <img src="imagens/ferro.png" alt="Ferro">
+        </div>
+        <div class="floating-img">
+            <img src="imagens/ouro.png" alt="Ouro">
+        </div>
+    </div>
+
+    <header class="main-header">
+        <h1 class="header-title">FESTA ÉPICA!</h1>
+        <div class="header-info">
+            <div class="header-info-box">
+                <span class="cake-icon">🎂</span>
+                <p><strong>Cauã Lucca Della Volpe</strong></p>
+                <p>Está fazendo <strong>8 ANOS!</strong></p>
+            </div>
+        </div>
+    </header>
+
+    <main class="invitation-card">
+        <div class="card-title-container">
+            <h2 class="card-title">AVENTURA MINECRAFT</h2>
+            <p>Você está convidado para uma festa INCRÍVEL!</p>
+        </div>
+
+        <div class="details-grid">
+            <div class="detail-box">
+                <span class="detail-icon">📅</span>
+                <div class="detail-content">
+                    <h3>Data da Aventura</h3>
+                    <p>25 de Outubro de 2024</p>
+                </div>
+            </div>
+            <div class="detail-box">
+                <span class="detail-icon">⏰</span>
+                <div class="detail-content">
+                    <h3>Horário</h3>
+                    <p>11:00h da manhã</p>
+                </div>
+            </div>
+            <div class="detail-box">
+                <span class="detail-icon">📍</span>
+                <div class="detail-content">
+                    <h3>Local</h3>
+                    <p>A definir - Aguarde mais detalhes!</p>
+                </div>
+            </div>
+            <div class="detail-box">
+                <span class="detail-icon">🎉</span>
+                <div class="detail-content">
+                    <h3>Atividades Épicas!</h3>
+                    <ul>
+                        <li>Jogos e brincadeiras</li>
+                        <li>Surpresas incríveis</li>
+                        <li>Muita diversão garantida!</li>
+                    </ul>
+                </div>
+            </div>
+            <div class="steve-container">
+                <div class="detail-box steve-box">
+                    <span class="detail-icon">🤸</span>
+                    <div class="detail-content">
+                        <h3>Diversão Garantida</h3>
+                        <p>Venha se divertir e pular comigo no Spice Jump. Ficarei feliz em estar com você comemorando meu aniversário!</p>
+                    </div>
+                </div>
+                <img src="imagens/steve.png" alt="Steve" class="steve-image">
+            </div>
+        </div>
+
+        <div class="special-message-box">
+            <h3 class="message-title">Mensagem Especial</h3>
+            <p>Prepare-se para uma aventura inesquecível no mundo do Minecraft! Vamos construir memórias incríveis juntos e celebrar os 8 anos do Cauã com muita diversão, risadas e surpresas épicas!</p>
+        </div>
+
+        <a href="https://forms.gle/ydJWG3E57kAxLxbv8" class="confirm-button" target="_blank">
+            <span>✨</span> CONFIRMAR PRESENÇA <span>✨</span>
+        </a>
+
+        <p class="confirm-instruction">Clique para confirmar sua presença e explodir fogos de artifício!</p>
+    </main>
+
+    <footer class="main-footer">
+        <p>🎉 Feliz Aniversário, Cauã! Que seus 8 anos sejam repletos de aventuras! 🎉</p>
+    </footer>
+
+    <script>
+        // Sons do jogo
+        let backgroundMusic = null;
+        let clickSound = null;
+        let hitSound = null;
+
+        // Função para inicializar os sons
+        function initializeSounds() {
+            try {
+                // Som de fundo
+                backgroundMusic = new Audio('fundo.mp3');
+                backgroundMusic.loop = true;
+                backgroundMusic.volume = 0.3;
+                
+                // Som de clique
+                clickSound = new Audio('click.mp3');
+                clickSound.volume = 0.7;
+                
+                // Som de hit no Steve
+                hitSound = new Audio('hit.mp3');
+                hitSound.volume = 0.8;
+                
+                console.log('Sons inicializados com sucesso!');
+            } catch (error) {
+                console.log('Erro ao carregar sons:', error);
+            }
+        }
+
+        // Função para tocar som de fundo
+        function playBackgroundMusic() {
+            if (backgroundMusic) {
+                backgroundMusic.play().catch(error => {
+                    console.log('Erro ao tocar música de fundo:', error);
+                });
+            }
+        }
+
+        // Função para tocar som de clique
+        function playClickSound() {
+            if (clickSound) {
+                clickSound.currentTime = 0; // Reinicia o som
+                clickSound.play().catch(error => {
+                    console.log('Erro ao tocar som de clique:', error);
+                });
+            }
+        }
+
+        // Função para tocar som de hit
+        function playHitSound() {
+            if (hitSound) {
+                hitSound.currentTime = 0; // Reinicia o som
+                hitSound.play().catch(error => {
+                    console.log('Erro ao tocar som de hit:', error);
+                });
+            }
+        }
+
+        // Inicializar quando a página carregar
+        window.addEventListener('load', function() {
+            initializeSounds();
+            
+            // Tocar música de fundo automaticamente sem necessidade de clique
+            setTimeout(() => {
+                playBackgroundMusic();
+            }, 500);
+        });
+
+        // Função para tentar tocar música de fundo com diferentes métodos
+        function attemptAutoplay() {
+            if (backgroundMusic && backgroundMusic.paused) {
+                // Tentar tocar com promise
+                const playPromise = backgroundMusic.play();
+                
+                if (playPromise !== undefined) {
+                    playPromise
+                        .then(() => {
+                            console.log('Música de fundo iniciada automaticamente');
+                        })
+                        .catch(error => {
+                            console.log('Autoplay bloqueado pelo navegador');
+                            // Fallback: tocar no primeiro clique
+                            document.addEventListener('click', function() {
+                                if (backgroundMusic && backgroundMusic.paused) {
+                                    playBackgroundMusic();
+                                }
+                            }, { once: true });
+                        });
+                }
+            }
+        }
+
+        // Tentar autoplay em vários momentos
+        document.addEventListener('DOMContentLoaded', attemptAutoplay);
+        window.addEventListener('load', () => {
+            setTimeout(attemptAutoplay, 100);
+            setTimeout(attemptAutoplay, 500);
+            setTimeout(attemptAutoplay, 1000);
+        });
+
+        // Adicionar som de clique a todos os elementos clicáveis
+        document.addEventListener('DOMContentLoaded', function() {
+            // Som no botão de confirmação
+            const confirmButton = document.querySelector('.confirm-button');
+            if (confirmButton) {
+                confirmButton.addEventListener('click', function(e) {
+                    playClickSound();
+                    
+                    // Efeito visual
+                    const button = this;
+                    button.style.transform = 'translateY(6px)';
+                    button.style.boxShadow = 'none';
+                    
+                    setTimeout(() => {
+                        button.style.transform = '';
+                        button.style.boxShadow = '';
+                    }, 150);
+
+                    // Criar mais partículas no clique
+                    for(let i = 0; i < 10; i++) {
+                        setTimeout(() => createParticle(), i * 100);
+                    }
+                });
+            }
+
+            // Som de hit no Steve
+            const steveImage = document.querySelector('.steve-image');
+            if (steveImage) {
+                steveImage.addEventListener('click', function(e) {
+                    e.preventDefault();
+                    e.stopPropagation();
+                    playHitSound();
+                    
+                    // Efeito visual de "pancada" no Steve
+                    const steve = this;
+                    steve.style.transform = 'scale(0.9)';
+                    steve.style.filter = 'drop-shadow(2px 2px 4px rgba(0,0,0,0.5)) brightness(1.2)';
+                    
+                    setTimeout(() => {
+                        steve.style.transform = 'scale(1)';
+                        steve.style.filter = 'drop-shadow(2px 2px 4px rgba(0,0,0,0.5))';
+                    }, 150);
+
+                    // Criar partículas especiais quando bater no Steve
+                    for(let i = 0; i < 15; i++) {
+                        setTimeout(() => createSpecialParticle(steve), i * 50);
+                    }
+                });
+            }
+
+            // Som em outros elementos clicáveis
+            const clickableElements = document.querySelectorAll('.detail-box, .card-title-container');
+            clickableElements.forEach(element => {
+                element.addEventListener('click', function(e) {
+                    playClickSound();
+                    
+                    // Efeito visual de clique
+                    this.classList.add('clicked');
+                    
+                    // Criar partículas no local do clique
+                    const rect = this.getBoundingClientRect();
+                    const centerX = rect.left + rect.width / 2;
+                    const centerY = rect.top + rect.height / 2;
+                    
+                    for(let i = 0; i < 8; i++) {
+                        setTimeout(() => createClickParticle(centerX, centerY), i * 50);
+                    }
+                    
+                    // Remover classe após animação
+                    setTimeout(() => {
+                        this.classList.remove('clicked');
+                    }, 300);
+                });
+            });
+        });
+
+        // Efeito de partículas simples
+        function createParticle() {
+            const particle = document.createElement('div');
+            particle.style.position = 'fixed';
+            particle.style.width = '6px';
+            particle.style.height = '6px';
+            particle.style.backgroundColor = '#fff200';
+            particle.style.borderRadius = '50%';
+            particle.style.pointerEvents = 'none';
+            particle.style.zIndex = '1000';
+            particle.style.left = Math.random() * window.innerWidth + 'px';
+            particle.style.top = '100vh';
+            particle.style.boxShadow = '0 0 6px #fff200';
+            
+            document.body.appendChild(particle);
+            
+            const animation = particle.animate([
+                { transform: 'translateY(0px)', opacity: 1 },
+                { transform: 'translateY(-100vh)', opacity: 0 }
+            ], {
+                duration: Math.random() * 3000 + 2000,
+                easing: 'linear'
+            });
+            
+            animation.addEventListener('finish', () => {
+                particle.remove();
+            });
+        }
+
+        // Efeito de partículas especiais para o Steve
+        function createSpecialParticle(steveElement) {
+            const particle = document.createElement('div');
+            particle.style.position = 'fixed';
+            particle.style.width = '8px';
+            particle.style.height = '8px';
+            particle.style.backgroundColor = '#ff4444';
+            particle.style.borderRadius = '50%';
+            particle.style.pointerEvents = 'none';
+            particle.style.zIndex = '1001';
+            
+            // Posição baseada no Steve
+            const steveRect = steveElement.getBoundingClientRect();
+            particle.style.left = (steveRect.left + steveRect.width/2) + 'px';
+            particle.style.top = (steveRect.top + steveRect.height/2) + 'px';
+            particle.style.boxShadow = '0 0 8px #ff4444';
+            
+            document.body.appendChild(particle);
+            
+            const angle = Math.random() * 2 * Math.PI;
+            const distance = Math.random() * 100 + 50;
+            const endX = Math.cos(angle) * distance;
+            const endY = Math.sin(angle) * distance - 50;
+            
+            const animation = particle.animate([
+                { transform: 'translate(0px, 0px)', opacity: 1 },
+                { transform: `translate(${endX}px, ${endY}px)`, opacity: 0 }
+            ], {
+                duration: 800,
+                easing: 'ease-out'
+            });
+            
+            animation.addEventListener('finish', () => {
+                particle.remove();
+            });
+        }
+
+        // Efeito de partículas para cliques nos cards
+        function createClickParticle(centerX, centerY) {
+            const particle = document.createElement('div');
+            particle.style.position = 'fixed';
+            particle.style.width = '6px';
+            particle.style.height = '6px';
+            particle.style.backgroundColor = '#00ff00';
+            particle.style.borderRadius = '50%';
+            particle.style.pointerEvents = 'none';
+            particle.style.zIndex = '1001';
+            particle.style.left = centerX + 'px';
+            particle.style.top = centerY + 'px';
+            particle.style.boxShadow = '0 0 6px #00ff00';
+            
+            document.body.appendChild(particle);
+            
+            const angle = Math.random() * 2 * Math.PI;
+            const distance = Math.random() * 80 + 40;
+            const endX = Math.cos(angle) * distance;
+            const endY = Math.sin(angle) * distance - 30;
+            
+            const animation = particle.animate([
+                { transform: 'translate(-50%, -50%) scale(1)', opacity: 1 },
+                { transform: `translate(calc(-50% + ${endX}px), calc(-50% + ${endY}px)) scale(0)`, opacity: 0 }
+            ], {
+                duration: 600,
+                easing: 'ease-out'
+            });
+            
+            animation.addEventListener('finish', () => {
+                particle.remove();
+            });
+        }
+
+        // Desabilitar menu de contexto (botão direito)
+        document.addEventListener('contextmenu', function(e) {
+            e.preventDefault();
+            return false;
+        });
+
+        // Desabilitar seleção com mouse
+        document.addEventListener('selectstart', function(e) {
+            e.preventDefault();
+            return false;
+        });
+
+        // Desabilitar drag de elementos
+        document.addEventListener('dragstart', function(e) {
+            e.preventDefault();
+            return false;
+        });
+
+        // Desabilitar atalhos de teclado comuns
+        document.addEventListener('keydown', function(e) {
+            // Ctrl+A (selecionar tudo)
+            if (e.ctrlKey && e.key === 'a') {
+                e.preventDefault();
+                return false;
+            }
+            
+            // Ctrl+S (salvar)
+            if (e.ctrlKey && e.key === 's') {
+                e.preventDefault();
+                return false;
+            }
+            
+            // Ctrl+P (imprimir)
+            if (e.ctrlKey && e.key === 'p') {
+                e.preventDefault();
+                return false;
+            }
+            
+            // Ctrl+U (ver código fonte)
+            if (e.ctrlKey && e.key === 'u') {
+                e.preventDefault();
+                return false;
+            }
+            
+            // F12 (ferramentas do desenvolvedor)
+            if (e.key === 'F12') {
+                e.preventDefault();
+                return false;
+            }
+            
+            // Ctrl+Shift+I (ferramentas do desenvolvedor)
+            if (e.ctrlKey && e.shiftKey && e.key === 'I') {
+                e.preventDefault();
+                return false;
+            }
+            
+            // Ctrl+Shift+J (console)
+            if (e.ctrlKey && e.shiftKey && e.key === 'J') {
+                e.preventDefault();
+                return false;
+            }
+            
+            // Ctrl+Shift+C (inspecionar elemento)
+            if (e.ctrlKey && e.shiftKey && e.key === 'C') {
+                e.preventDefault();
+                return false;
+            }
+
+            // M para mutar/desmutar música (MANTIDO)
+            if (e.key.toLowerCase() === 'm' && backgroundMusic) {
+                if (backgroundMusic.muted) {
+                    backgroundMusic.muted = false;
+                    console.log('Música de fundo ativada');
+                } else {
+                    backgroundMusic.muted = true;
+                    console.log('Música de fundo mutada');
+                }
+            }
+        });
+    </script>
+</body>
+</html>
