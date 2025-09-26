@@ -219,7 +219,12 @@
         .header-info-box p {
             margin: 5px 0;
             line-height: 1.3;
-            font-size: 0.8rem;
+            font-size: 1.2rem;
+        }
+
+        .header-info-box p strong {
+            font-size: 1.5rem;
+            text-shadow: 3px 3px 0 #000;
         }
 
         .cake-icon {
@@ -334,8 +339,9 @@
             border-radius: 15px;
             padding: 20px;
             display: flex;
-            align-items: flex-start;
-            text-align: left;
+            align-items: center; /* Alinhamento vertical centralizado */
+            text-align: center; /* Alinhamento horizontal centralizado */
+            flex-direction: column; /* Organizar conteúdo em coluna */
             transition: all 0.3s ease;
             position: relative;
             min-height: 120px;
@@ -365,7 +371,7 @@
 
         .detail-icon {
             font-size: 2.5rem;
-            margin-right: 15px;
+            margin-bottom: 10px; /* Adicionado espaço abaixo do ícone */
             line-height: 1;
             animation: bounce 2s ease-in-out infinite;
             position: relative;
@@ -388,13 +394,19 @@
             font-size: 0.8rem;
             text-shadow: 2px 2px 0 #000;
         }
-
-        .detail-content p {
+        
+        .detail-content p, .detail-content a {
             font-size: 0.6rem;
             line-height: 1.5;
             word-wrap: break-word;
             overflow-wrap: break-word;
             hyphens: auto;
+            color: #fff;
+            text-decoration: none;
+        }
+        
+        .detail-content a:hover {
+            text-decoration: underline;
         }
 
         .detail-content ul {
@@ -528,10 +540,10 @@
         .steve-container {
             position: relative;
             display: flex;
-            align-items: flex-start;
+            flex-direction: column;
+            align-items: center;
             gap: 10px;
             width: 100%;
-            flex-wrap: wrap;
         }
 
         .steve-box {
@@ -541,44 +553,38 @@
         }
 
         .steve-image {
-            width: 60px;
-            height: 60px;
+            width: 60px; /* Mantém a largura fixa */
+            height: auto; /* A altura se ajusta automaticamente para manter a proporção */
             image-rendering: pixelated;
             filter: drop-shadow(2px 2px 4px rgba(0,0,0,0.5));
             flex-shrink: 0;
-            margin-top: 5px;
             order: 2;
             position: relative;
             cursor: pointer;
             transition: all 0.15s ease;
         }
 
-        /* Responsividade para telas maiores */
+        /* Ajuste do layout para telas menores */
+        @media (max-width: 600px) {
+            .steve-container {
+                flex-direction: column;
+            }
+            .steve-image {
+                width: 70px;
+                height: auto;
+                margin-top: 15px;
+            }
+        }
+        
+        /* Media Queries para layout de grid */
         @media (min-width: 768px) {
             .details-grid {
                 grid-template-columns: repeat(2, 1fr);
             }
-            
-            .detail-content h3 {
-                font-size: 0.9rem;
-            }
-            
-            .detail-content p,
-            .detail-content li {
-                font-size: 0.7rem;
-            }
-            
-            .confirm-button {
-                font-size: 0.9rem;
-            }
-
             .steve-container {
-                gap: 15px;
-            }
-
-            .steve-image {
-                width: 80px;
-                height: 80px;
+                flex-direction: row;
+                justify-content: center;
+                gap: 20px;
             }
         }
 
@@ -615,7 +621,8 @@
             }
             
             .detail-content p,
-            .detail-content li {
+            .detail-content li,
+            .detail-content a {
                 font-size: 0.6rem;
                 line-height: 1.6;
             }
@@ -633,7 +640,7 @@
             
             .steve-image {
                 width: 70px;
-                height: 70px;
+                height: auto;
                 margin-top: 0;
                 order: 1;
             }
@@ -683,7 +690,8 @@
             }
             
             .detail-content p,
-            .detail-content li {
+            .detail-content li,
+            .detail-content a {
                 font-size: 0.55rem;
             }
             
@@ -718,7 +726,6 @@
     </style>
 </head>
 <body>
-    <!-- Imagens flutuantes decorativas -->
     <div class="floating-images">
         <div class="floating-img">
             <img src="imagens/diamante.png" alt="Diamante">
@@ -780,21 +787,23 @@
                 <span class="detail-icon">📅</span>
                 <div class="detail-content">
                     <h3>Data da Aventura</h3>
-                    <p>25 de Outubro de 2024</p>
+                    <p>25 de Outubro de 2025</p>
                 </div>
             </div>
             <div class="detail-box">
                 <span class="detail-icon">⏰</span>
                 <div class="detail-content">
                     <h3>Horário</h3>
-                    <p>11:00h da manhã</p>
+                    <p>Chegue às 2h da tarde para organização da entrada, pois o ingresso é <b>Válido das 2h30 até as 4h30</b></p>
                 </div>
             </div>
             <div class="detail-box">
                 <span class="detail-icon">📍</span>
                 <div class="detail-content">
                     <h3>Local</h3>
-                    <p>A definir - Aguarde mais detalhes!</p>
+                    <p>Space Jump</p>
+                    <p>Rua 12, Chácara 139/1, Lotes 31, 33 E, Vicente Pires, Brasília - DF</p>
+                    <a href="https://maps.app.goo.gl/wS7824rY1rNqYJkDA" target="_blank">Ver no Google Maps</a>
                 </div>
             </div>
             <div class="detail-box">
@@ -802,9 +811,9 @@
                 <div class="detail-content">
                     <h3>Atividades Épicas!</h3>
                     <ul>
-                        <li>Jogos e brincadeiras</li>
+                        <li>Serão duas horas de muita diversão.</li>
                         <li>Surpresas incríveis</li>
-                        <li>Muita diversão garantida!</li>
+                        <li>Não atrase para podermos curtir cada minuto</li>
                     </ul>
                 </div>
             </div>
