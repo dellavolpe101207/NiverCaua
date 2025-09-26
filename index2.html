@@ -470,7 +470,7 @@
 
         .steve-image {
             width: 80px;
-            height: 80px;
+            height: auto;
             image-rendering: pixelated;
             filter: drop-shadow(2px 2px 4px rgba(0,0,0,0.5));
             cursor: pointer;
@@ -538,7 +538,6 @@
     </style>
 </head>
 <body>
-    <!-- Imagens flutuantes decorativas -->
     <div class="floating-images">
         <div class="floating-img">
             <img src="imagens/diamante.png" alt="Diamante">
@@ -584,7 +583,7 @@
             <div class="header-info-box">
                 <span class="cake-icon">🎂</span>
                 <p><strong>Festa do Cauã Lucca</strong></p>
-                <p>25 de Outubro - <strong>11:00h</strong></p>
+                <p>25 de Outubro - <strong>14:00h</strong></p>
             </div>
         </div>
     </header>
@@ -599,10 +598,11 @@
             <img src="imagens/steve.png" alt="Steve" class="steve-image">
         </div>
 
-        <!-- Formulário de Confirmação -->
         <div class="form-container">
             <h3 class="form-title">📝 FORMULÁRIO DE CONFIRMAÇÃO</h3>
-            <div id="ff-compose"></div>
+            <div id="ff-compose">
+                <iframe src="https://docs.google.com/forms/d/e/1FAIpQLSfs2e935vdiN2B1frZtd01s1uAQ3_gb6a8CiZFmJLzpNnhb-Q/viewform?embedded=true" width="640" height="622" frameborder="0" marginheight="0" marginwidth="0">Carregando…</iframe>
+            </div>
         </div>
 
         <div class="special-message-box">
@@ -618,9 +618,6 @@
     <footer class="main-footer">
         <p>🎉 Obrigado por fazer parte desta aventura épica! 🎉</p>
     </footer>
-
-    <!-- Script do FormFacade -->
-    <script async defer src="https://formfacade.com/include/111966122169310344586/form/1FAIpQLSfs2e935vdiN2B1frZtd01s1uAQ3_gb6a8CiZFmJLzpNnhb-Q/classic.js?div=ff-compose"></script>
 
     <script>
         // Sons do jogo (versão simplificada)
