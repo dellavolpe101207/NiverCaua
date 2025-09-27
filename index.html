@@ -435,6 +435,21 @@
             50% { opacity: 0.5; }
         }
 
+        /* Classe para destacar o horário */
+        .horario-destaque {
+            font-size: 0.75rem; /* Aumenta um pouco a fonte */
+            font-weight: bold; /* Deixa o texto em negrito */
+            color: #fff200; /* Cor amarela para chamar a atenção */
+            text-shadow: 2px 2px 0 #000; /* Sombra para destacar ainda mais */
+            animation: pulse-horario 1.5s ease-in-out infinite alternate; /* Adiciona uma animação sutil */
+        }
+
+        @keyframes pulse-horario {
+            0%, 100% { transform: scale(1); }
+            50% { transform: scale(1.05); }
+        }
+
+
         /* Mensagem especial */
         .special-message-box {
             background: linear-gradient(145deg, #f0c22d, #d4a021);
@@ -794,7 +809,7 @@
                 <span class="detail-icon">⏰</span>
                 <div class="detail-content">
                     <h3>Horário</h3>
-                    <p>Chegue às 14h para organização da entrada, pois o ingresso é <b>Válido das 14h30 até as 16h30</b></p>
+                    <p>Chegue às 14h para organização da entrada, pois o ingresso é <span class="horario-destaque">Válido das 14h30 até as 16h30</span></p>
                 </div>
             </div>
             <div class="detail-box">
